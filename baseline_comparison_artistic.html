@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html class=" w-mod-ix">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <style>
+        .wf-force-outline-none[tabindex="-1"]:focus {
+            outline: none;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WNGS4SZ3C7"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-WNGS4SZ3C7');
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Synthesizing Artistic Cinemagraphs from Text</title>
+    <link rel="stylesheet" href="images/bootstrap.min.css">
+    <link href="images/css.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="images/Highlight-Clean.css">
+    <link rel="stylesheet" href="images/styles.css">
+
+    <link rel="manifest" href="images/site.webmanifest">
+
+    <meta property="og:site_name" content="Artistic Cinemagraph">
+    <!-- <meta property="og:type" content="video.other"> -->
+    <meta property="og:title" content="Synthesizing Artistic Cinemagraphs from Text">
+    <meta property="og:description" content="Synthesizing Artistic Cinemagraphs from Text, 2023.">
+    <meta property="og:url" content="https://sd-animation.github.io/cinemania/">
+
+    <meta name="description" content="Artistic Cinemagraph">
+    <meta property="og:url" content="https://sd-animation.github.io/cinemania/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Synthesizing Artistic Cinemagraphs from Text">
+    <meta property="og:description" content="Synthesizing Artistic Cinemagraphs from Text, 2023.">
+    <meta property="og:image" content="./images/teaser.png">
+    <meta property="og:video" content="./images/teaser2.mp4">
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://sd-animation.github.io/cinemania/">
+    <meta name="twitter:title" content="Synthesizing Artistic Cinemagraphs from Text">
+    <meta name="twitter:description" content="Synthesizing Artistic Cinemagraphs from Text, 2023.">
+    <meta name="twitter:image" content="./images/teaser.png">
+    <meta name="twitter:video" content="./images/teaser2.mp4">
+
+
+    <script src="images/video_comparison.js"></script>
+    <script type="module" src="images/model-viewer.min.js"></script>
+
+
+</head>
+
+<body>
+
+
+    <!-- <div class="banner">
+      <video class="video lazy" poster="https://pub-b1f092b6867f4495b8f149d222a3bffe.r2.dev/sept28/banner_1x6_customhue_A.jpg" autoplay="autoplay" loop="" playsinline="" muted="muted">
+        <source data-src="https://pub-b1f092b6867f4495b8f149d222a3bffe.r2.dev/sept28/banner_1x6_customhue_A.mp4" type="video/mp4" src="images/banner_1x6_customhue_A.mp4">
+      </video>
+    </div> -->
+    <div class="highlight-clean" style="padding-bottom: 20px;">
+        <div class="container" style="padding-bottom: 10px; max-width: 1000px;">
+            <h1 class="text-center">Synthesizing Artistic Cinemagraphs from Text</h1>
+        </div>
+        <!-- <div class="container" style="max-width: 900px;">
+            <div class="row authors" style="padding-bottom: 25px; padding-left: 50px;">
+                <h5 class="text-center"><a class="text-center" href="https://anime26398.github.io/">Aniruddha
+                        Mahapatra</a><sup style="padding-right: 25px;">1</sup></h5>
+                <h5 class="text-center"><a class="text-center"
+                        href="https://aliaksandrsiarohin.github.io/aliaksandr-siarohin-website/">Aliaksandr
+                        Siarohin</a><sup style="padding-right: 25px;">2</sup></h5>
+                <h5 class="text-center"><a href="http://hsinyinglee.com/">Hsin-Ying Lee</a><sup
+                        style="padding-right: 25px;">2</sup></h5>
+                <h5 class="text-center"><a class="text-center" href="http://www.stulyakov.com/">Sergey
+                        Tulyakov</a><sup style="padding-right: 25px;">2</sup></h5>
+                <h5 class="text-center"><a class="text-center" href="https://www.cs.cmu.edu/~junyanz/">Jun-Yan
+                        Zhu</a><sup style="padding-right: 25px;">1</sup></h5>
+            </div>
+            <div class="row authors institute">
+                <div class="col-sm-12">
+                    <h3 class="text-center"><sup>1</sup> CMU &nbsp&nbsp <sup>2</sup>Snap Research
+                    </h3>
+                </div>
+            </div>
+        </div> -->
+        <div class="buttons" style="margin-bottom: 8px;">
+            <a class="btn btn-light" role="button" href="./index.html">
+                <svg style="width:24px;height:24px;margin-left:-12px;margin-right:12px" width="24px" height="24px"
+                    viewBox="0 0 375 531">
+                    <polygon stroke="#000000" points="459.5,0.866 0.5,265.87 459.5,530.874 " />
+                </svg>
+                Back
+            </a>
+        </div>
+    </div>
+    <hr style="max-width: 1400px;">
+    <div class="container" style="max-width: 1400px; display: flex; justify-content: center;">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-center" style="margin-bottom: 30px; margin-top: 10px;">Comparison to Baseline Methods
+                    (Artistic Domain)</h2>
+                <div style="display: flex; justify-content: center;">
+                    <p style="margin-bottom: 30px; margin-bottom: 30px; max-width: 1400px;">
+                        Given the input text prompt (below each row of results), we compare our method with both
+                        single-image animation methods and text-to-video models in the artistic domain. For single-image
+                        animation methods, we use the same static image as our method, generated by Stable Diffusion. As
+                        the videos produced by these baselines are non-looping, we implement a postprocessing method
+                        <a href="http://www.cgg.cs.tsukuba.ac.jp/~endo/projects/AnimatingLandscape/">[Endo et al.
+                            2019]</a> to make the generated videos looping.
+                        page.
+                    </p>
+                </div>
+
+                <div class="containershadow"
+                    style="max-width: 90vw; overflow-y: scroll; display: flex; justify-content: center;">
+                    <div id="singleconceptscroll" style="width: 90vw;">
+
+                        <div class=" row" style="display: flex; justify-content: center; margin-bottom: -30px;">
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">Ours</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/our/0/seed_9/video.mp4" style="width:300px"
+                                        type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">Animating Landscape</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-AL/0/seed_9/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">Eulerian</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-Eulerian/0/seed_9/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">SLR-SFS</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-SLR-SFS/0/seed_9/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">CogVideo</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-CogVideo-loop/0/seed_9/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">Text2VideoZero</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-Text2VideoZero-loop/0/seed_9/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">VideoCrafter</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-VideoCrafter-loop/0/seed_9/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" row" style="display: flex; justify-content: center;">
+                            <p style="font-family: Chalkduster; font-size: 16px; margin-top: 5px; text-align: center;">
+                                "a
+                                large waterfall falling between hills in the style Van Gough painting during sunset, 4k"
+                            </p>
+                        </div>
+                        <hr />
+
+
+                        <div class=" row" style="display: flex; justify-content: center; margin-bottom: -30px;">
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">Ours</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/our/1/seed_40/video.mp4" style="width:300px"
+                                        type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">Animating Landscape</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-AL/1/seed_40/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">Eulerian</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-Eulerian/1/seed_40/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">SLR-SFS</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-SLR-SFS/1/seed_40/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">CogVideo</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-CogVideo-loop/1/seed_40/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">Text2VideoZero</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-Text2VideoZero-loop/1/seed_40/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">VideoCrafter</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-VideoCrafter-loop/1/seed_40/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" row" style="display: flex; justify-content: center;">
+                            <p style="font-family: Chalkduster; font-size: 16px; margin-top: 5px; text-align: center;">
+                                "a
+                                photo of a waterfall falling from a hill covered in snow during winter"</p>
+                        </div>
+                        <hr />
+
+
+                        <div class=" row" style="display: flex; justify-content: center; margin-bottom: -30px;">
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">Ours</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/our/13/seed_23/video.mp4" style="width:300px"
+                                        type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">Animating Landscape</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-AL/13/seed_23/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">Eulerian</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-Eulerian/13/seed_23/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">SLR-SFS</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-SLR-SFS/13/seed_23/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">CogVideo</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-CogVideo-loop/13/seed_23/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">Text2VideoZero</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-Text2VideoZero-loop/13/seed_23/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">VideoCrafter</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-VideoCrafter-loop/13/seed_23/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" row" style="display: flex; justify-content: center;">
+                            <p style="font-family: Chalkduster; font-size: 16px; margin-top: 5px; text-align: center;">
+                                "a
+                                small wooden house, with a boat floating on lake, in the style of Camille Pissarro"</p>
+                        </div>
+                        <hr />
+
+
+                        <div class=" row" style="display: flex; justify-content: center; margin-bottom: -30px;">
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">Ours</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/our/16/seed_94/video.mp4" style="width:300px"
+                                        type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">Animating Landscape</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-AL/16/seed_94/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">Eulerian</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-Eulerian/16/seed_94/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">SLR-SFS</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-SLR-SFS/16/seed_94/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">CogVideo</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-CogVideo-loop/16/seed_94/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">Text2VideoZero</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-Text2VideoZero-loop/16/seed_94/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">VideoCrafter</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-VideoCrafter-loop/16/seed_94/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" row" style="display: flex; justify-content: center;">
+                            <p style="font-family: Chalkduster; font-size: 16px; margin-top: 5px; text-align: center;">
+                                "world war scene, fighter planes in the sky, clouds, cinematic ancient photo, brown
+                                tint"
+                            </p>
+                        </div>
+                        <hr />
+
+
+                        <div class=" row" style="display: flex; justify-content: center; margin-bottom: -30px;">
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">Ours</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/our/18/seed_100/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">Animating Landscape</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-AL/18/seed_100/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">Eulerian</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-Eulerian/18/seed_100/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">SLR-SFS</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-SLR-SFS/18/seed_100/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">CogVideo</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-CogVideo-loop/18/seed_100/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">Text2VideoZero</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-Text2VideoZero-loop/18/seed_100/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">VideoCrafter</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-VideoCrafter-loop/18/seed_100/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" row" style="display: flex; justify-content: center;">
+                            <p style="font-family: Chalkduster; font-size: 16px; margin-top: 5px; text-align: center;">
+                                "always the sun, beautiful strange detailed summer seascape painting 8k resolution
+                                deviantart trending on Artstation concept art digital illustration"</p>
+                        </div>
+                        <hr />
+
+
+                        <div class=" row" style="display: flex; justify-content: center; margin-bottom: -30px;">
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">Ours</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/our/2/seed_23/video.mp4" style="width:300px"
+                                        type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">Animating Landscape</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-AL/2/seed_23/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">Eulerian</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-Eulerian/2/seed_23/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">SLR-SFS</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-SLR-SFS/2/seed_23/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">CogVideo</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-CogVideo-loop/2/seed_23/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">Text2VideoZero</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-Text2VideoZero-loop/2/seed_23/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">VideoCrafter</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-VideoCrafter-loop/2/seed_23/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" row" style="display: flex; justify-content: center;">
+                            <p style="font-family: Chalkduster; font-size: 16px; margin-top: 5px; text-align: center;">
+                                "a
+                                large waterfall falling from hills during sunset in the style of Leonid Afremov"</p>
+                        </div>
+                        <hr />
+
+
+                        <div class=" row" style="display: flex; justify-content: center; margin-bottom: -30px;">
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">Ours</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/our/6/seed_100/video.mp4" style="width:300px"
+                                        type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">Animating Landscape</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-AL/6/seed_100/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">Eulerian</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-Eulerian/6/seed_100/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">SLR-SFS</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-SLR-SFS/6/seed_100/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">CogVideo</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-CogVideo-loop/6/seed_100/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">Text2VideoZero</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-Text2VideoZero-loop/6/seed_100/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">VideoCrafter</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-VideoCrafter-loop/6/seed_100/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" row" style="display: flex; justify-content: center;">
+                            <p style="font-family: Chalkduster; font-size: 16px; margin-top: 5px; text-align: center;">
+                                "a
+                                large river flowing in front of a mountain in the style of starry nights painting"</p>
+                        </div>
+                        <hr />
+
+
+                        <div class=" row" style="display: flex; justify-content: center; margin-bottom: -30px;">
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">Ours</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/our/3/seed_0/video.mp4" style="width:300px"
+                                        type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">Animating Landscape</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-AL/3/seed_0/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">Eulerian</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-Eulerian/3/seed_0/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">SLR-SFS</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-SLR-SFS/3/seed_0/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">CogVideo</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-CogVideo-loop/3/seed_0/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">Text2VideoZero</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-Text2VideoZero-loop/3/seed_0/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">VideoCrafter</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-VideoCrafter-loop/3/seed_0/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" row" style="display: flex; justify-content: center;">
+                            <p style="font-family: Chalkduster; font-size: 16px; margin-top: 5px; text-align: center;">
+                                "a
+                                watercolor painting of a waterfall, high definition, 4k"</p>
+                        </div>
+                        <hr />
+
+
+                        <div class=" row" style="display: flex; justify-content: center; margin-bottom: -30px;">
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">Ours</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/our/4/seed_0/video.mp4" style="width:300px"
+                                        type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">Animating Landscape</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-AL/4/seed_0/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">Eulerian</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-Eulerian/4/seed_0/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">SLR-SFS</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-SLR-SFS/4/seed_0/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">CogVideo</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-CogVideo-loop/4/seed_0/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">Text2VideoZero</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-Text2VideoZero-loop/4/seed_0/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                            <div class="column px-4" style="flex: 1;">
+                                <div class="row text-center"
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <p style="font-size: 16px; margin-top: 5px;">VideoCrafter</p>
+                                    <video autoplay="autoplay" controls="controls" loop="loop" muted="muted"
+                                        src="./all_results/artistic-domain/motion-VideoCrafter-loop/4/seed_0/video.mp4"
+                                        style="width:300px" type="video/mp4"></video>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" row" style="display: flex; justify-content: center;">
+                            <p style="font-family: Chalkduster; font-size: 16px; margin-top: 5px; text-align: center;">
+                                "a
+                                surreal and dreamlike waterfall scene, using imaginative colors and shapes to create a
+                                fantastical image"</p>
+                        </div>
+                        <hr />
+
+
+                    </div>
+                </div>
+
+
+                <p></p>
+                <p></p>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <script src="images/polyfill.js"></script>
+    <script src="images/yall.js"></script>
+    <script>
+        yall(
+            {
+                observeChanges: true
+            }
+        );
+    </script>
+    <script src="images/scripts.js"></script>
+    <script src="images/jquery.min.js"></script>
+    <script src="images/bootstrap.bundle.min.js"></script>
+    <script src="images/webflow.fd002feec.js"></script>
+
+    <!-- Import the component -->
+
+
+
+</body>
+
+</html>
