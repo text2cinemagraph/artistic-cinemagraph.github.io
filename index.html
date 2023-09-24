@@ -22,7 +22,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Synthesizing Artistic Cinemagraphs from Text</title>
+    <title>Text-Guided Synthesis of Eulerian Cinemagraphs</title>
     <link rel="stylesheet" href="images/bootstrap.min.css">
     <link href="images/css.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="images/Highlight-Clean.css">
@@ -32,23 +32,23 @@
 
     <meta property="og:site_name" content="Text2Cinemagraph">
     <!-- <meta property="og:type" content="video.other"> -->
-    <meta property="og:title" content="Synthesizing Artistic Cinemagraphs from Text">
-    <meta property="og:description" content="Synthesizing Artistic Cinemagraphs from Text, 2023.">
+    <meta property="og:title" content="Text-Guided Synthesis of Eulerian Cinemagraphs">
+    <meta property="og:description" content="Text-Guided Synthesis of Eulerian Cinemagraphs, 2023.">
     <meta property="og:url" content="https://text2cinemagraph.github.io/website/">
 
     <meta name="description" content="Text2Cinemagraph">
     <meta property="og:url" content="https://text2cinemagraph.github.io/website/">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Synthesizing Artistic Cinemagraphs from Text">
-    <meta property="og:description" content="Synthesizing Artistic Cinemagraphs from Text, 2023.">
+    <meta property="og:title" content="Text-Guided Synthesis of Eulerian Cinemagraphs">
+    <meta property="og:description" content="Text-Guided Synthesis of Eulerian Cinemagraphs, 2023.">
     <meta property="og:image" content="https://text2cinemagraph.github.io/website/images/teaser.png">
     <meta property="og:video" content="https://text2cinemagraph.github.io/website/images/teaser.mp4">
 
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://text2cinemagraph.github.io/website/">
-    <meta name="twitter:title" content="Synthesizing Artistic Cinemagraphs from Text">
-    <meta name="twitter:description" content="Synthesizing Artistic Cinemagraphs from Text, 2023.">
+    <meta name="twitter:title" content="Text-Guided Synthesis of Eulerian Cinemagraphs">
+    <meta name="twitter:description" content="Text-Guided Synthesis of Eulerian Cinemagraphs, 2023.">
     <meta name="twitter:image" content="https://text2cinemagraph.github.io/website/images/teaser.png">
     <meta name="twitter:video" content="https://text2cinemagraph.github.io/website/images/teaser.mp4">
 
@@ -69,9 +69,9 @@
     </div> -->
     <div class="highlight-clean" style="padding-bottom: 20px;">
         <div class="container" style="padding-bottom: 10px; max-width: 1000px;">
-            <h1 class="text-center">Synthesizing Artistic Cinemagraphs from Text</h1>
+            <h1 class="text-center">Text-Guided Synthesis of Eulerian Cinemagraphs</h1>
         </div>
-        <!-- <div class="container" style="max-width: 900px;">
+        <div class="container" style="max-width: 900px;">
             <div class="row authors" style="padding-bottom: 25px; padding-left: 50px;">
                 <h5 class="text-center"><a class="text-center" href="https://anime26398.github.io/">Aniruddha
                         Mahapatra</a><sup style="padding-right: 25px;">1</sup></h5>
@@ -91,16 +91,22 @@
                     </h3>
                 </div>
             </div>
-        </div> -->
+            <div class="row authors institute">
+                <div class="col-sm-12">
+                    <h3 class="text-center">(SIGGRAPH ASIA 2023)
+                    </h3>
+                </div>
+            </div>
+        </div>
         <div class="buttons" style="margin-bottom: 8px;">
-            <!-- <a class="btn btn-light" role="button" href="">
+            <a class="btn btn-light" role="button" href="https://arxiv.org/abs/2307.03190">
                 <svg style="width:24px;height:24px;margin-left:-12px;margin-right:12px" viewBox="0 0 24 24">
                     <path fill="currentColor"
                         d="M16 0H8C6.9 0 6 .9 6 2V18C6 19.1 6.9 20 8 20H20C21.1 20 22 19.1 22 18V6L16 0M20 18H8V2H15V7H20V18M4 4V22H20V24H4C2.9 24 2 23.1 2 22V4H4M10 10V12H18V10H10M10 14V16H15V14H10Z">
                     </path>
                 </svg>Paper
             </a>
-            <a class="btn btn-light" role="button" href="">
+            <!-- <a class="btn btn-light" role="button" href="">
                 <svg style="visibility:hidden;width:0px;height:24px;margin-left:-12px;margin-right:12px" width="0px"
                     height="24px" viewBox="0 0 375 531">
                     <polygon stroke="#000000" points="0.5,0.866 459.5,265.87 0.5,530.874 " />
@@ -108,12 +114,24 @@
                 arXiv
             </a> -->
             <a class="btn btn-light" role="button" href="https://github.com/text2cinemagraph/artistic-cinemagraph">
-                <svg style="visibility:hidden;width:0px;height:24px;margin-left:-12px;margin-right:12px" width="0px"
-                    height="24px" viewBox="0 0 375 531">
-                    <polygon stroke="#000000" points="0.5,0.866 459.5,265.87 0.5,530.874 " />
+                <svg style="width:24px;height:24px;margin-left:-12px;margin-right:12px" width="24px" height="24px" viewBox="0 0 475 531"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path>
                 </svg>
                 Code
             </a>
+            <!-- <a class="btn btn-light disabled border border-dark" aria-disabled="true" role="button" href="#">
+                <svg style="visibility:hidden;width:0px;height:24px;margin-left:-12px;margin-right:12px" width="0px" height="0px"
+                    height="24px" viewBox="0 0 375 531">
+                    <polygon stroke="#000000" points="0.5,0.866 459.5,265.87 0.5,530.874 " />
+                </svg>
+                Project
+            </a>
+            <a class="btn btn-light" role="button" href="./our_results.html">
+                <svg style="width:24px;height:24px;margin-left:-12px;margin-right:12px" width="24px" height="24px"
+                    height="24px" viewBox="0 0 375 531">
+                    <polygon stroke="#000000" points="0.5,0.866 459.5,265.87 0.5,530.874 " />
+                </svg>
+                Gallery
+            </a> -->
             <a class="btn btn-light disabled border border-dark" aria-disabled="true" role="button" href="#">
                 <svg style="visibility:hidden;width:0px;height:24px;margin-left:-12px;margin-right:12px" width="0px"
                     height="24px" viewBox="0 0 375 531">
@@ -122,20 +140,13 @@
                 Project
             </a>
             <a class="btn btn-light" role="button" href="./gallery.html">
-                <svg style="visibility:hidden;width:0px;height:24px;margin-left:-12px;margin-right:12px" width="0px"
+                <svg style="width:24px;height:24px;margin-left:-12px;margin-right:12px" width="24px"
                     height="24px" viewBox="0 0 375 531">
                     <polygon stroke="#000000" points="0.5,0.866 459.5,265.87 0.5,530.874 " />
                 </svg>
                 Gallery
             </a>
-            <!-- <a class="btn btn-light" role="button" href="results.html">
-                <svg style="width:24px;height:24px;margin-left:-12px;margin-right:12px" width="24px" height="24px"
-                    viewBox="0 0 375 531">
-                    <polygon stroke="#000000" points="0.5,0.866 459.5,265.87 0.5,530.874 " />
-                </svg>
-                Gallery
-            </a>
-            <a class="btn btn-light" role="button"
+            <!-- <a class="btn btn-light" role="button"
                 href="https://www.cs.cmu.edu/~custom-diffusion/assets/custom_diffusion.pptx">
                 <svg style="visibility:hidden;width:0px;height:24px;margin-left:-12px;margin-right:12px" width="0px"
                     height="24px" viewBox="0 0 375 531">
@@ -189,7 +200,9 @@
                     cinemagraphs from text
                     descriptions --- an
                     especially challenging task when prompts feature imaginary elements and artistic styles, given the
-                    complexity of interpreting the semantics and motions of these images. Existing single-image
+                    complexity of interpreting the semantics and motions of these images. We focus on cinemagraphs of 
+                    fluid elements, such as flowing rivers, and drifting clouds, which exhibit continuous motion and 
+                    repetitive textures. Existing single-image
                     animation methods fall short on artistic inputs, and recent text-based video methods frequently
                     introduce temporal inconsistencies, struggling to keep certain regions static. To address these
                     challenges, we propose an idea of synthesizing image <b><strong><em>twins</em></strong></b> from a
@@ -2373,17 +2386,16 @@
     </div> -->
 
 
-    <!-- 
     <hr style="max-width: 1400px;">
     <div class="container" style="max-width: 1400px;">
         <div class="row">
             <div class="col-md-12">
                 <h2>Citation</h2>
                 <code>
-                    @inproceedings{kumari2022customdiffusion,<br>
-                    &nbsp; author = {Kumari, Nupur and Zhang, Bingliang and Zhang, Richard and Shechtman, Eli and Zhu, Jun-Yan},<br>
-                    &nbsp; title  = {Multi-Concept Customization of Text-to-Image Diffusion},<br>
-                    &nbsp; booktitle = {CVPR},<br>
+                    @inproceedings{mahapatra2023synthesizing,<br>
+                    &nbsp; author={Mahapatra, Aniruddha and Siarohin, Aliaksandr and Lee, Hsin-Ying and Tulyakov, Sergey and Zhu, Jun-Yan},<br>
+                    &nbsp; title={Synthesizing Artistic Cinemagraphs from Text},,<br>
+                    &nbsp; journal={arXiv preprint arXiv:2307.03190},<br>
                     &nbsp; year   = {2023},<br>
                 }</code>
             </div>
@@ -2397,30 +2409,22 @@
                 <h2>Related and Concurrent Works</h2>
                 <h5>
                     <ul>
-                        <li>Nataniel Ruiz, Yuanzhen Li, Varun Jampani, Yael Pritch, Michael Rubinstein, and Kfir
-                            Aberman. <a href="https://dreambooth.github.io"> Dreambooth: Fine tuning text-to-image
-                                diffusion models for subject-driven generation. </a> arXiv preprint arXiv:2208.12242
-                            (2022). </li><br>
+                        <li>Siming Fan, Jingtan Piao, Chen Qian, Kwan-Yee Lin, and Hongsheng Li. 
+                            <a href="https://slr-sfs.github.io/"> Simulating Fluids in Real-World Still Images. </a> ICCV
+                            2023. </li><br>
 
-                        <li>Rinon Gal, Yuval Alaluf, Yuval Atzmon, Or Patashnik, Amit H. Bermano, Gal Chechik, and
-                            Daniel Cohen-Or. <a href="https://textual-inversion.github.io">An image is worth one
-                                word:
-                                Personalizing text-to-image generation using textual inversion.</a> arXiv preprint
-                            arXiv:2208.01618 (2022).</li><br>
+                        <li>Aniruddha Mahapatra and Kuldeep Kulkarni. <a href="https://controllable-cinemagraphs.github.io/">
+                            Controllable Animation of Fluid Elements in Still Images.</a> CVPR 2022.</li><br>
 
-                        <li>Nan Liu, Shuang Li, Yilun Du, Antonio Torralba, and Joshua B. Tenenbaum. <a
-                                href="https://energy-based-model.github.io/Compositional-Visual-Generation-with-Composable-Diffusion-Models/">Compositional
-                                Visual Generation with Composable Diffusion Models.</a> ECCV 2022.</li><br>
-
-                        <li>Suraj Patil. <a
-                                href="https://huggingface.co/valhalla/sd-wikiart-v2">valhalla/sd-wikiart-v2.</a>
-                            Fine-tuning with only attention layer update.</li><br>
+                        <li>Aleksander Holynski, Brian Curless, Steven M. Seitz, and Richard Szeliski. <a
+                                href="https://energy-based-model.github.io/Compositional-Visual-Generation-with-Composable-Diffusion-Models/">
+                                Animating Pictures with Eulerian Motion Fields.</a> CVPR 2021.</li><br>
 
                     </ul>
                 </h5>
             </div>
         </div>
-    </div> -->
+    </div>
 
 
     <hr style="max-width: 1400px;">
@@ -2429,12 +2433,10 @@
             <div class="col-md-12">
                 <h2>Acknowledgements</h2>
                 <p>
-                    <!-- We are grateful to Nupur Kumari, Gaurav Parmar, Sheng-Yu Wang, Andrew Song, Or Patashnik and Songwei
-                    Ge for their
-                    helpful comments and discussion,
-                    and to Gaurav Parmar and Or Patashnik for
-                    proofreading the draft.
-                    This work was partly done by Aniruddha Mahapatra during the Snap internship. -->
+                    We are also grateful to Nupur Kumari, Gaurav Parmar, Or Patashnik, Songwei Ge, Sheng-Yu Wang, Chonghyuk (Andrew) Song, 
+                    Daohan (Fred) Lu, Richard Zhang, and Phillip Isola for fruitful discussions. This work is partly supported by Snap Inc. 
+                    and was partly done while Aniruddha was an intern at Snap Inc.
+                    <br>
                     The website template is taken from <a href="https://www.cs.cmu.edu/~custom-diffusion/">Custom
                         Diffusion</a> (which was built on<a href="https://dreamfusion3d.github.io/index.html">
                         DreamFusion</a>'s project page). The text editor used in the demo video has been taken from <a
